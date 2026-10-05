@@ -4,16 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Альфиянын тушоо тою — чакыруу</title>
+<meta name="description" content="Сүйүктүү кызыбыз Альфиянын тушоо тоюна сизди чакырабыз.">
+<meta name="theme-color" content="#F4DFDA">
+<meta name="color-scheme" content="light">
+
+<!-- Превью ссылки в WhatsApp / Telegram -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Альфиянын тушоо тою — чакыруу">
+<meta property="og:description" content="Сүйүктүү кызыбыз Альфиянын тушоо тоюна сизди чакырабыз.">
+<!-- Когда выложите сайт, добавьте картинку 1200×630 и полный адрес (https://...):
+<meta property="og:image" content="https://ВАШ-САЙТ/preview.jpg">
+<meta property="og:url" content="https://ВАШ-САЙТ/">
+-->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌹</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Marck+Script&display=swap" rel="stylesheet">
 <style>
   :root {
+    color-scheme: light;
     --bg: #F4DFDA;
     --bg2: #FBF1ED;
     --ink: #2F2926;
     --muted: #7B6A63;
-    --gold: #B5965F;
+    --gold: #B5965F;          /* линии, рамки, украшения */
+    --gold-ink: #8F7240;      /* золото для текста и кнопок (читаемый контраст) */
     --leaf: #8A9A7C;
     --petal1: #FAEFEA;
     --petal2: #F2DED7;
@@ -21,24 +37,12 @@
     --petal-line: #D6B8AE;
     --card: rgba(255,255,255,.55);
     --serif: "Cormorant Garamond", "Times New Roman", Georgia, serif;
-    --script: "Great Vibes", "Cormorant Garamond", Georgia, serif;
+    --script: "Marck Script", "Cormorant Garamond", Georgia, serif;
     --ease-out: cubic-bezier(.2,.8,.2,1);
     --spring: cubic-bezier(.34,1.56,.64,1);
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #2A1E20; --bg2: #33262A; --ink: #F5E8E3; --muted: #C4AEA7; --gold: #D4B483;
-      --leaf: #6F8264; --petal1: #EBD3CC; --petal2: #DDB9B0; --petal3: #CDA097; --petal-line: #B68880;
-      --card: rgba(255,255,255,.06);
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #2A1E20; --bg2: #33262A; --ink: #F5E8E3; --muted: #C4AEA7; --gold: #D4B483;
-    --leaf: #6F8264; --petal1: #EBD3CC; --petal2: #DDB9B0; --petal3: #CDA097; --petal-line: #B68880;
-    --card: rgba(255,255,255,.06);
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -51,7 +55,7 @@
   }
   .defs { position: absolute; width: 0; height: 0; overflow: hidden; }
   button { font: inherit; color: inherit; }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
 
   /* ===== розы ===== */
   .corner { position: absolute; overflow: visible; pointer-events: none; animation: sway 8s ease-in-out infinite alternate; }
@@ -101,24 +105,30 @@
     letter-spacing: .16em; line-height: 1.1; padding-left: .16em;
     transform: translateY(115%); transition: transform 1.3s var(--ease-out) var(--n, 1s); }
   .cover.in .name { transform: none; }
-  .girl { display: block; font-family: var(--script); color: transparent;
-    background: linear-gradient(100deg, var(--gold) 42%, color-mix(in srgb, var(--gold) 35%, #fff) 50%, var(--gold) 58%) 120% 0 / 250% 100% no-repeat;
-    -webkit-background-clip: text; background-clip: text;
+
+  /* Имя: сначала обычный цвет (работает везде), градиент — только там, где браузер умеет */
+  .girl { display: block; font-family: var(--script); color: var(--gold-ink);
     font-size: clamp(3.4rem, 17vw, 5rem); line-height: 1.05; margin: .1em 0 0;
     clip-path: inset(-25% 100% -25% -5%); transition: clip-path 1.6s cubic-bezier(.5,0,.3,1) 1.7s; }
-  .cover.in .girl { clip-path: inset(-25% -5% -25% -5%); animation: shimmer 6s ease-in-out 4.2s infinite; }
-  @keyframes shimmer { 0% { background-position: 120% 0; } 55%, 100% { background-position: -20% 0; } }
+  .cover.in .girl { clip-path: inset(-25% -5% -25% -5%); }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) and (color: color-mix(in srgb, red, blue)) {
+    .girl { color: transparent;
+      background: linear-gradient(100deg, var(--gold-ink) 42%, color-mix(in srgb, var(--gold) 35%, #fff) 50%, var(--gold-ink) 58%) 100% 0 / 250% 100% no-repeat;
+      -webkit-background-clip: text; background-clip: text; }
+    .cover.in .girl { animation: shimmer 6s ease-in-out 4.2s infinite; }
+  }
+  @keyframes shimmer { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0% 0; } }
   .date-big { margin: 1.2rem 0 0; font-weight: 300; font-size: clamp(2.2rem, 10vw, 3rem); letter-spacing: .08em; line-height: 1; }
   .date-cap { margin: .35rem 0 0; font-size: .95rem; color: var(--muted); letter-spacing: .06em; }
 
   .open-btn {
-    position: relative; z-index: 1; background: transparent; border: 1px solid var(--gold); border-radius: 999px;
+    position: relative; z-index: 1; background: transparent; border: 1px solid var(--gold-ink); border-radius: 999px;
     padding: .7rem 2rem; font-size: 1.15rem; letter-spacing: .08em; cursor: pointer;
     transition: opacity 1.1s ease calc(var(--e, 0) * 1s), transform 1.1s var(--ease-out) calc(var(--e, 0) * 1s), background .3s ease 0s, color .3s ease 0s;
   }
   .open-btn::before { content: ""; position: absolute; inset: -6px; border-radius: 999px; border: 1px solid var(--gold); opacity: 0; }
   .cover.in .open-btn::before { animation: pulse 2.8s ease-out 3.6s infinite; }
-  .open-btn:hover { background: var(--gold); color: #fff; }
+  .open-btn:hover { background: var(--gold-ink); color: #fff; }
   .open-btn:active { transform: scale(.96); }
   @keyframes pulse { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(1.2, 1.55); } }
 
@@ -162,7 +172,9 @@
   .sec.in .w > span { transform: none; }
   p { margin: 0 0 1rem; }
   .muted { color: var(--muted); }
-  .script { font-family: var(--script); color: var(--gold); font-size: 2.6rem; line-height: 1.1; }
+  .script { font-family: var(--script); color: var(--gold-ink); font-size: 2.6rem; line-height: 1.1; }
+  /* для слов с буквами ү, ө, ң — обычный курсив, чтобы буквы не менялись на другой шрифт */
+  .script.alt { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 2.3rem; }
   .host-label { font-size: .95rem; letter-spacing: .12em; color: var(--muted); margin: 1.8rem 0 0; }
 
   .js .st { opacity: 0; transform: translateY(20px);
@@ -173,7 +185,7 @@
 
   .greet { min-height: 100vh; min-height: 100svh; display: grid; align-content: center; padding-top: 7rem; }
   .hint { position: absolute; bottom: 2.2rem; left: 0; right: 0; font-size: .95rem; color: var(--muted); letter-spacing: .1em; }
-  .hint span { display: block; font-size: 1.4rem; color: var(--gold); animation: nudge 2s ease-in-out infinite; }
+  .hint span { display: block; font-size: 1.4rem; color: var(--gold-ink); animation: nudge 2s ease-in-out infinite; }
   @keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
 
   /* календарь */
@@ -185,19 +197,24 @@
   .js .sec.in .cal i { opacity: 1; transform: none; }
   .cal i.hit { color: #fff; z-index: 0; }
   .cal i.hit::before, .cal i.hit::after { content: ""; position: absolute; aspect-ratio: 1; border-radius: 50%; z-index: -1; }
-  .cal i.hit::before { width: 112%; background: var(--gold); transform: scale(0); transition: transform .9s var(--spring) 1.5s; }
+  .cal i.hit::before { width: 112%; background: var(--gold-ink); transform: scale(0); transition: transform .9s var(--spring) 1.5s; }
   .cal i.hit::after { width: 140%; border: 1px solid var(--gold); opacity: 0; transform: scale(.4); transition: transform 1.1s var(--ease-out) 1.8s, opacity 1.1s ease 1.8s; }
   .sec.in .cal i.hit::before { transform: scale(1); }
   .sec.in .cal i.hit::after { transform: scale(1); opacity: .7; }
 
   .count { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; max-width: 360px; margin: 0 auto; }
-  .count div { padding: .9rem .2rem .7rem; background: var(--card); border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent); border-radius: 999px 999px 18px 18px; }
+  .count div { padding: .9rem .2rem .7rem; background: var(--card);
+    border: 1px solid rgba(181,150,95,.35);
+    border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent);
+    border-radius: 999px 999px 18px 18px; }
   .count strong { display: block; font-weight: 400; font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
   .count span { font-size: .85rem; color: var(--muted); }
+  .count .done { grid-column: 1 / -1; background: none; border: 0; padding: 0; margin: 0; }
 
   /* программа */
   .timeline { list-style: none; margin: 2rem auto 0; padding: 0; max-width: 340px; text-align: left; position: relative; }
   .timeline::before { content: ""; position: absolute; left: 4.1rem; top: .6rem; bottom: .6rem; width: 1px;
+    background: rgba(181,150,95,.6);
     background: color-mix(in srgb, var(--gold) 60%, transparent);
     transform: scaleY(0); transform-origin: top; transition: transform 2.2s cubic-bezier(.5,0,.3,1) .5s; }
   .sec.in .timeline::before { transform: none; }
@@ -224,14 +241,19 @@
   .place-name { font-size: 1.7rem; margin: 0 0 .2rem; }
   .btn {
     display: inline-block; margin-top: .6rem; background: transparent; text-decoration: none; color: inherit;
-    border: 1px solid var(--gold); border-radius: 999px; padding: .65rem 1.8rem;
+    border: 1px solid var(--gold-ink); border-radius: 999px; padding: .65rem 1.8rem;
     letter-spacing: .06em; cursor: pointer; transition: background .3s, color .3s, transform .2s, opacity .3s;
   }
-  .btn:hover { background: var(--gold); color: #fff; }
+  .btn:hover { background: var(--gold-ink); color: #fff; }
   .btn:active { transform: scale(.96); }
   .btn:disabled { opacity: .5; cursor: default; }
-  .btn.solid { background: var(--gold); color: #fff; }
+  .btn.solid { background: var(--gold-ink); color: #fff; }
   .btn.solid:hover { background: transparent; color: inherit; }
+  .btn.small { padding: .45rem 1.2rem; font-size: 1rem; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: .5rem .6rem; justify-content: center; margin-top: .8rem; }
+  .btn-row .btn { margin-top: 0; }
+  .link-btn { background: none; border: 0; padding: .3rem .5rem; color: var(--muted); text-decoration: underline; cursor: pointer; font-size: 1rem; }
+  .link-btn:hover { color: var(--ink); }
 
   /* тилек */
   .wish { font-size: clamp(1.5rem, 6.6vw, 1.9rem); line-height: 1.35; font-style: italic; font-weight: 400; max-width: 22ch; margin: 1.2rem auto 0; }
@@ -241,15 +263,16 @@
     border: 0; border-bottom: 1px solid var(--gold); padding: .5rem .2rem; text-align: center;
     font: inherit; font-size: 1.25rem; color: var(--ink); border-radius: 0; }
   .field.small { max-width: 110px; }
+  textarea.field { resize: none; font-size: 1.1rem; line-height: 1.4; }
   .field::placeholder { color: var(--muted); opacity: .8; }
-  .field:focus { outline: none; border-bottom-width: 2px; }
+  .field:focus { outline: none; border-bottom-width: 2px; border-bottom-color: var(--gold-ink); }
   .field.shake { animation: shake .45s ease; }
   @keyframes shake { 20% { transform: translateX(-7px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } }
   .lbl { display: block; color: var(--muted); margin-top: 1.1rem; font-size: 1rem; }
   .rsvp-btns { display: flex; flex-direction: column; gap: .7rem; align-items: center; }
   .rsvp-form { transition: opacity .45s ease, transform .45s ease; }
   .rsvp-form.out { opacity: 0; transform: translateY(-10px); pointer-events: none; }
-  .rsvp-hint { min-height: 1.6em; margin-top: 1rem; color: var(--gold); }
+  .rsvp-hint { min-height: 1.6em; margin-top: 1rem; color: var(--gold-ink); }
   .rsvp-ok { margin-top: 1.2rem; }
   .rsvp-ok[hidden] { display: none; }
   .ok-ring { width: 84px; height: 84px; display: block; margin: 0 auto .6rem; overflow: visible; }
@@ -257,7 +280,7 @@
   .rsvp-ok.show .ok-ring circle { animation: draw 1.1s ease forwards; }
   .rsvp-ok.show .ok-ring path { animation: draw .8s ease .9s forwards; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
-  .rsvp-msg { color: var(--gold); font-size: 1.25rem; opacity: 0; transform: translateY(10px); transition: opacity .8s ease 1.4s, transform .8s var(--ease-out) 1.4s; }
+  .rsvp-msg { color: var(--gold-ink); font-size: 1.25rem; opacity: 0; transform: translateY(10px); transition: opacity .8s ease 1.4s, transform .8s var(--ease-out) 1.4s; }
   .rsvp-ok.show .rsvp-msg { opacity: 1; transform: none; }
 
   .footer { padding-bottom: 8rem; }
@@ -377,7 +400,7 @@
     <svg class="corner tl" viewBox="0 0 240 240" aria-hidden="true" data-par></svg>
     <svg class="corner br" viewBox="0 0 240 240" aria-hidden="true" data-par></svg>
     <div class="rv">
-      <h2>Урматтуу туугандар жана достор!</h2>
+      <h2 id="greetTitle">Урматтуу туугандар жана достор!</h2>
       <p>Сүйүктүү кызыбыз Альфиянын тушоо тоюна сизди чакырабыз.</p>
       <p>Кичинекей кызыбыздын биринчи кадамдары ийгиликтүү болсун деген тилек менен, бул кубанычты сиздер менен бөлүшкүбүз келет.</p>
       <p class="host-label">той ээлери</p>
@@ -391,12 +414,15 @@
       <h2 id="dateTitle">00-ноябрь 0000</h2>
       <div class="month" id="monthName"></div>
       <div class="cal" id="cal" aria-label="Календарь"></div>
-      <p class="muted" style="margin-bottom:1.2rem">Тоюна чейин калды</p>
+      <p class="muted" id="cdLabel" style="margin-bottom:1.2rem">Тоюна чейин калды</p>
       <div class="count" id="count">
         <div><strong id="cd">0</strong><span>күн</span></div>
         <div><strong id="ch">00</strong><span>саат</span></div>
         <div><strong id="cm">00</strong><span>мүнөт</span></div>
         <div><strong id="cs">00</strong><span>секунд</span></div>
+      </div>
+      <div class="btn-row" id="calRow">
+        <a class="btn small" id="calLink" href="#" target="_blank" rel="noopener">Календарга кошуу</a>
       </div>
     </div>
   </section>
@@ -426,7 +452,11 @@
       <h2>Той өтө турган жер</h2>
       <p class="place-name">Тойкана «Мейман»</p>
       <p class="muted" id="addrText">Бишкек ш., Гүлзар көчөсү, 12</p>
-      <a class="btn" id="mapLink" href="#" target="_blank" rel="noopener">Картадан ачуу</a>
+      <div class="btn-row">
+        <a class="btn small" id="mapGis" href="#" target="_blank" rel="noopener">2GIS</a>
+        <a class="btn small" id="mapGoogle" href="#" target="_blank" rel="noopener">Google Maps</a>
+        <a class="btn small" id="mapYandex" href="#" target="_blank" rel="noopener">Яндекс</a>
+      </div>
     </div>
   </section>
 
@@ -446,9 +476,11 @@
       <p id="rsvpBy">Катышаарыңызды тастыктап коюуңузду сурайбыз.</p>
       <div class="rsvp-form" id="rsvpForm">
         <label class="lbl" for="guest">Аты-жөнүңүз</label>
-        <input class="field" id="guest" type="text" placeholder="Атыңыз" autocomplete="name">
+        <input class="field" id="guest" type="text" placeholder="Атыңыз" autocomplete="name" maxlength="80">
         <label class="lbl" for="guests">Канча киши келесиздер?</label>
         <input class="field small" id="guests" type="number" min="1" max="20" value="1" inputmode="numeric">
+        <label class="lbl" for="wishText">Тилегиңиз</label>
+        <textarea class="field" id="wishText" rows="2" maxlength="300" placeholder="милдеттүү эмес"></textarea>
         <div class="rsvp-btns">
           <button class="btn solid" type="button" data-answer="yes">Ооба, келебиз</button>
           <button class="btn" type="button" data-answer="no">Кечиресиз, келе албайбыз</button>
@@ -461,8 +493,9 @@
           <path id="okPath" d="M24 41l11 11 21-24" pathLength="1"/>
         </svg>
         <div class="rsvp-msg" id="rsvpMsg" role="status"></div>
+        <button class="link-btn" id="rsvpChange" type="button">Жоопту өзгөртүү</button>
       </div>
-      <p class="script wipe" style="margin-top:3rem">Күтөбүз!</p>
+      <p class="script alt wipe" style="margin-top:3rem">Күтөбүз!</p>
       <p class="host-label" style="margin-top:.4rem">той ээлери</p>
       <p class="names-end">Дамира · Муктар</p>
     </div>
@@ -473,14 +506,18 @@
 <script>
   // ============ НАСТРОЙКИ — меняйте здесь ============
   var CONFIG = {
-    date: new Date(2026, 10, 14, 15, 0, 0),     // год, месяц (0 = январь, 10 = ноябрь), день, часы, минуты
+    // Дата со смещением часового пояса: +06:00 — Бишкек. Отсчёт будет верным в любой точке мира.
+    date: new Date('2026-11-14T15:00:00+06:00'),
+    tz: 'Asia/Bishkek',                            // часовой пояс места тоя: по нему показывается дата на странице
+    durationHours: 4,                              // длительность для «Календарга кошуу»
     placeName: 'Тойкана «Мейман»',
-    address: 'Бишкек ш., Гүлзар көчөсү, 12',     // для кнопки «Картадан ачуу»
-    rsvpBy: '1-ноябрга чейин',                    // например '1-ноябрга чейин'; пусто '' — убрать срок
-    notifyUrl: ''                                 // ссылка на Google Apps Script (Telegram-уведомления); пусто — без уведомлений
+    address: 'Бишкек ш., Гүлзар көчөсү, 12',        // для кнопок карт
+    city2gis: 'bishkek',                           // город в ссылке 2GIS (например 'osh', 'karakol')
+    rsvpBy: '1-ноябрга чейин',                     // например '1-ноябрга чейин'; пусто '' — убрать срок
+    notifyUrl: 'https://script.google.com/macros/s/AKfycbwZW-1NNgofq-LXExhQgXUUk7rpF7ukxM8kcjQB7t2ghjI9CfdFlMdXcMSKENJ9jG2wEw/exec',  // ссылка на Google Apps Script (/exec); пусто — без уведомлений в Telegram
   };
 
-  // Firebase: вставьте данные вашего проекта (Project settings → Your apps → Web app).
+  // Firebase: данные вашего проекта (Project settings → Your apps → Web app).
   // Пока projectId пустой, ответы сохраняются только в браузере гостя.
   var FIREBASE = {
     apiKey: 'AIzaSyD7O2nLFrQAQOvHXV1v3FchdXC1J2UNrUA',
@@ -490,13 +527,14 @@
     messagingSenderId: '666481699200',
     appId: '1:666481699200:web:f7f77fa21820f03824b965'
   };
-  var FIREBASE_VERSION = '10.12.2';
   var FIREBASE_COLLECTION = 'guests';
+  var SAVE_TIMEOUT_MS = 10000;                     // сколько ждать ответа Firebase
   // ===================================================
 
   var root = document.documentElement;
   root.classList.add('js', 'locked');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mobile = window.innerWidth < 600;
   var cover = document.getElementById('cover');
   var opened = false;
   var cdMode = 'idle';
@@ -506,19 +544,50 @@
 
   function safeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function safeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function safeDel(k) { try { localStorage.removeItem(k); } catch (e) {} }
   function rand(a, b) { return a + Math.random() * (b - a); }
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
+  // Дата тоя в часовом поясе места (не гостя): {year, month (1-12), day}
+  function tzParts(d) {
+    try {
+      var o = {};
+      new Intl.DateTimeFormat('en-US', { timeZone: CONFIG.tz, year: 'numeric', month: 'numeric', day: 'numeric' })
+        .formatToParts(d).forEach(function (p) { if (p.type !== 'literal') o[p.type] = parseInt(p.value, 10); });
+      if (o.year && o.month && o.day) return o;
+    } catch (e) {}
+    return { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
+  }
+  var DP = tzParts(CONFIG.date);
+
+  // Имя гостя из ссылки: ?g=Айгүл
+  var GUEST_NAME = '';
+  try {
+    GUEST_NAME = (new URLSearchParams(location.search).get('g') || '').trim().slice(0, 40);
+  } catch (e) {}
+
   // ---------- Подстановка данных ----------
   (function fill() {
-    var d = CONFIG.date;
-    document.getElementById('coverDate').textContent = pad(d.getDate()) + '·' + pad(d.getMonth() + 1);
-    document.getElementById('dateTitle').textContent = d.getDate() + '-' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+    document.getElementById('coverDate').textContent = pad(DP.day) + '·' + pad(DP.month);
+    document.getElementById('dateTitle').textContent = DP.day + '-' + MONTHS[DP.month - 1] + ' ' + DP.year;
     document.querySelector('.place-name').textContent = CONFIG.placeName;
     document.getElementById('addrText').textContent = CONFIG.address;
     document.getElementById('rsvpBy').textContent = CONFIG.rsvpBy
       ? 'Катышаарыңызды ' + CONFIG.rsvpBy + ' тастыктап коюуңузду сурайбыз.'
       : 'Катышаарыңызды тастыктап коюуңузду сурайбыз.';
+
+    if (GUEST_NAME) {
+      document.getElementById('greetTitle').textContent = 'Урматтуу ' + GUEST_NAME + '!';
+      document.getElementById('guest').value = GUEST_NAME;
+    }
+
+    // Той уже прошёл — вместо нулей показываем благодарность
+    if (CONFIG.date - new Date() <= 0) {
+      document.getElementById('cdLabel').textContent = '';
+      document.getElementById('count').innerHTML = '<div class="done"><span class="script" style="font-size:2.2rem">Той болду, рахмат!</span></div>';
+      document.getElementById('calRow').style.display = 'none';
+      cdMode = 'done';
+    }
   })();
 
   // ---------- Розы ----------
@@ -575,6 +644,7 @@
   function burst(x, y, n, k) {
     k = k || 1;
     if (reduce || !document.body.animate) return;
+    if (mobile) n = Math.ceil(n * .6);
     for (var i = 0; i < n; i++) {
       var el = makePetal(document.body);
       var ang = rand(0, Math.PI * 2);
@@ -591,6 +661,7 @@
   }
   function rain(n) {
     if (reduce || !document.body.animate) return;
+    if (mobile) n = Math.ceil(n * .6);
     for (var i = 0; i < n; i++) {
       var el = makePetal(document.body);
       var x = rand(0, innerWidth), sw = rand(30, 90), r = rand(-300, 300), h = innerHeight + 60;
@@ -605,6 +676,7 @@
   }
   function ambient(parent, n, cls, alpha) {
     if (reduce || !document.body.animate) return;
+    if (mobile) n = Math.ceil(n / 2);
     for (var i = 0; i < n; i++) {
       var el = makePetal(parent, cls);
       el.style.opacity = alpha;
@@ -616,6 +688,19 @@
       ], { duration: dur, delay: -rand(0, dur), iterations: Infinity, easing: 'linear' });
     }
   }
+
+  // Пауза всех анимаций, пока вкладка скрыта (экономит батарею)
+  var pausedAnims = [];
+  document.addEventListener('visibilitychange', function () {
+    if (!document.getAnimations) return;
+    if (document.hidden) {
+      pausedAnims = document.getAnimations().filter(function (a) { return a.playState === 'running'; });
+      pausedAnims.forEach(function (a) { try { a.pause(); } catch (e) {} });
+    } else {
+      pausedAnims.forEach(function (a) { try { a.play(); } catch (e) {} });
+      pausedAnims = [];
+    }
+  });
 
   // ---------- Вспышка света при открытии ----------
   function flash(x, y) {
@@ -629,8 +714,9 @@
   // ---------- Искры вокруг рамки ----------
   function addSparks() {
     if (reduce) return;
-    for (var i = 0; i < 12; i++) {
-      var a = (i / 12) * Math.PI * 2 + rand(-.2, .2);
+    var count = mobile ? 8 : 12;
+    for (var i = 0; i < count; i++) {
+      var a = (i / count) * Math.PI * 2 + rand(-.2, .2);
       var el = document.createElement('div');
       el.className = 'spark';
       el.style.left = (50 + Math.cos(a) * (50 + rand(-4, 7))) + '%';
@@ -745,9 +831,18 @@
       if (c.tagName === 'H2') {
         var words = c.textContent.split(' ');
         c.setAttribute('aria-label', c.textContent);
-        c.innerHTML = words.map(function (w, i) {
-          return '<span class="w" aria-hidden="true"><span style="--w:' + i + '">' + w + '</span></span>';
-        }).join(' ');
+        c.innerHTML = '';
+        words.forEach(function (word, i) {
+          var outer = document.createElement('span');
+          outer.className = 'w';
+          outer.setAttribute('aria-hidden', 'true');
+          var inner = document.createElement('span');
+          inner.style.setProperty('--w', i);
+          inner.textContent = word;           // textContent: безопасно для имени из ссылки
+          outer.appendChild(inner);
+          c.appendChild(outer);
+          if (i < words.length - 1) c.appendChild(document.createTextNode(' '));
+        });
         idx += 2;
         return;
       }
@@ -770,7 +865,11 @@
       if (sec.id === 'secDate') setTimeout(introCount, reduce ? 0 : 1300);
       if (sec.id === 'rsvpSec') setTimeout(function () { rain(16); }, reduce ? 0 : 700);
     }
-    if (reduce || !('IntersectionObserver' in window)) { secs.forEach(show); cdMode = 'live'; return; }
+    if (reduce || !('IntersectionObserver' in window)) {
+      secs.forEach(show);
+      if (cdMode === 'idle') { cdMode = 'live'; tick(true); }
+      return;
+    }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { show(en.target); io.unobserve(en.target); }
@@ -779,14 +878,14 @@
     secs.forEach(function (s) { io.observe(s); });
   }
 
-  // ---------- Календарь ----------
+  // ---------- Календарь (по часовому поясу места тоя) ----------
   (function calendar() {
-    var d = CONFIG.date, y = d.getFullYear(), m = d.getMonth(), day = d.getDate();
+    var y = DP.year, m = DP.month - 1, day = DP.day;
     document.getElementById('monthName').textContent = MONTHS[m] + ' ' + y;
     var wrap = document.getElementById('cal');
     WEEK.forEach(function (w) { var b = document.createElement('b'); b.textContent = w; wrap.appendChild(b); });
-    var offset = (new Date(y, m, 1).getDay() + 6) % 7;
-    var total = new Date(y, m + 1, 0).getDate();
+    var offset = (new Date(Date.UTC(y, m, 1)).getUTCDay() + 6) % 7;
+    var total = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
     var k = 0;
     for (var i = 0; i < offset; i++) wrap.appendChild(document.createElement('i'));
     for (var n = 1; n <= total; n++) {
@@ -832,8 +931,21 @@
   }
   setInterval(tick, 1000);
 
-  // ---------- Карта ----------
-  document.getElementById('mapLink').href = 'https://yandex.com/maps/?text=' + encodeURIComponent(CONFIG.address);
+  // ---------- Карты и календарь ----------
+  (function links() {
+    var q = encodeURIComponent(CONFIG.address);
+    document.getElementById('mapGis').href = 'https://2gis.kg/' + encodeURIComponent(CONFIG.city2gis) + '/search/' + q;
+    document.getElementById('mapGoogle').href = 'https://www.google.com/maps/search/?api=1&query=' + q;
+    document.getElementById('mapYandex').href = 'https://yandex.com/maps/?text=' + q;
+
+    function stamp(d) { return d.toISOString().replace(/[-:]|\.\d{3}/g, ''); }
+    var end = new Date(CONFIG.date.getTime() + CONFIG.durationHours * 3600 * 1000);
+    document.getElementById('calLink').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent('Альфиянын тушоо тою') +
+      '&dates=' + stamp(CONFIG.date) + '/' + stamp(end) +
+      '&location=' + encodeURIComponent(CONFIG.placeName + ', ' + CONFIG.address) +
+      '&details=' + encodeURIComponent('Дамира жана Муктар сизди чакырышат');
+  })();
 
   // ---------- Параллакс и прогресс ----------
   var parEls = [], ticking = false;
@@ -859,23 +971,47 @@
   }
 
   // ---------- Firebase ----------
-  var fbPromise = null;
   function fbReady() { return !!(FIREBASE && FIREBASE.projectId && FIREBASE.apiKey); }
-  function fbInit() {
-    if (fbPromise) return fbPromise;
-    var base = 'https://www.gstatic.com/firebasejs/' + FIREBASE_VERSION + '/';
-    fbPromise = Promise.all([import(base + 'firebase-app.js'), import(base + 'firebase-firestore.js')]).then(function (m) {
-      var app = m[0].initializeApp(FIREBASE);
-      return { fs: m[1], db: m[1].getFirestore(app) };
-    });
-    return fbPromise;
+  function withTimeout(p, ms) {
+    return Promise.race([
+      p,
+      new Promise(function (_, reject) { setTimeout(function () { reject(new Error('timeout')); }, ms); })
+    ]);
   }
-  function saveGuest(rec) {
+  function randomId() {
+    var c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', s = '';
+    for (var i = 0; i < 20; i++) s += c.charAt(Math.floor(Math.random() * c.length));
+    return s;
+  }
+  // Запись «создать или обновить» по постоянному ID гостя: повторная отправка
+  // (после таймаута или смены ответа) обновляет ту же запись, а не плодит дубли.
+  // Время updatedAt ставит сервер.
+  function saveGuest(rec, docId) {
     if (!fbReady()) return Promise.resolve();
-    return fbInit().then(function (f) {
-      var data = Object.assign({}, rec, { createdAt: f.fs.serverTimestamp() });
-      return f.fs.addDoc(f.fs.collection(f.db, FIREBASE_COLLECTION), data);
-    });
+    var db = 'projects/' + FIREBASE.projectId + '/databases/(default)';
+    var url = 'https://firestore.googleapis.com/v1/' + db + '/documents:commit?key=' + encodeURIComponent(FIREBASE.apiKey);
+    var body = { writes: [{
+      update: {
+        name: db + '/documents/' + FIREBASE_COLLECTION + '/' + docId,
+        fields: {
+          name:   { stringValue: rec.name },
+          answer: { stringValue: rec.answer },
+          guests: { integerValue: String(rec.guests) },
+          wish:   { stringValue: rec.wish || '' }
+        }
+      },
+      updateTransforms: [{ fieldPath: 'updatedAt', setToServerValue: 'REQUEST_TIME' }]
+    }] };
+    return withTimeout(fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      if (!r.ok) {
+        return r.text().then(function (t) { throw new Error('Firestore ' + r.status + ': ' + t.slice(0, 300)); });
+      }
+      return r.json();
+    }), SAVE_TIMEOUT_MS);
   }
 
   // ---------- Уведомление в Telegram (через Google Apps Script) ----------
@@ -898,10 +1034,25 @@
     var hint = document.getElementById('rsvpHint');
     var input = document.getElementById('guest');
     var guestsEl = document.getElementById('guests');
+    var wishEl = document.getElementById('wishText');
     var okPath = document.getElementById('okPath');
+    var changeBtn = document.getElementById('rsvpChange');
     var btns = document.querySelectorAll('[data-answer]');
     var HEART = 'M40 58C18 42 20 27 31 25.5C36 25 40 28.5 40 32C40 28.5 44 25 49 25.5C60 27 62 42 40 58Z';
     var CHECK = 'M24 41l11 11 21-24';
+
+    // Ответ запоминается отдельно для каждой именной ссылки (?g=...), чтобы на одном
+    // телефоне разные гости не видели ответ друг друга.
+    var KEY = 'tushoo-rsvp:' + GUEST_NAME;
+    var GID_KEY = 'tushoo-gid:' + GUEST_NAME;
+    var gidMem = '';
+    function getGid() {
+      var g = safeGet(GID_KEY);
+      if (!g) { g = gidMem || randomId(); safeSet(GID_KEY, g); }
+      gidMem = g;
+      return g;
+    }
+    var hadAnswer = false;   // ответ уже отправлялся раньше (для пометки «изменил ответ»)
 
     function show(answer, name, instant) {
       okPath.setAttribute('d', answer === 'yes' ? CHECK : HEART);
@@ -917,8 +1068,25 @@
       if (instant) reveal(); else setTimeout(reveal, 450);
     }
 
-    var saved = safeGet('tushoo-rsvp');
-    if (saved) { try { var s = JSON.parse(saved); show(s.a, s.n, true); } catch (e) {} }
+    function reopen() {
+      safeDel(KEY);            // идентификатор гостя (GID_KEY) остаётся: правка обновит ту же запись
+      ok.classList.remove('show');
+      ok.hidden = true;
+      form.style.display = '';
+      requestAnimationFrame(function () { form.classList.remove('out'); });
+      btns.forEach(function (x) { x.disabled = false; });
+      hint.textContent = '';
+      input.focus();
+    }
+    changeBtn.addEventListener('click', reopen);
+
+    var saved = safeGet(KEY);
+    if (saved) {
+      try {
+        var s = JSON.parse(saved);
+        if (s && s.a && s.n) { hadAnswer = true; input.value = s.n; show(s.a, s.n, true); }
+      } catch (e) {}
+    }
 
     btns.forEach(function (b) {
       b.addEventListener('click', function () {
@@ -933,10 +1101,13 @@
         hint.textContent = '';
         btns.forEach(function (x) { x.disabled = true; });
 
-        var rec = { name: name, answer: a, guests: a === 'yes' ? count : 0 };
-        saveGuest(rec).then(function () {
-          notify(rec);
-          safeSet('tushoo-rsvp', JSON.stringify({ a: a, n: name }));
+        var rec = { name: name.slice(0, 80), answer: a, guests: a === 'yes' ? count : 0, wish: wishEl.value.trim().slice(0, 300) };
+
+        saveGuest(rec, getGid()).then(function () {
+          // Telegram — только после успешного сохранения, чтобы база и уведомления не расходились
+          notify(Object.assign({ updated: hadAnswer }, rec));
+          hadAnswer = true;
+          safeSet(KEY, JSON.stringify({ a: a, n: name }));
           if (a === 'yes') {
             var r = b.getBoundingClientRect();
             burst(r.left + r.width / 2, r.top + r.height / 2, 28);
@@ -945,7 +1116,7 @@
         }).catch(function (err) {
           console.error(err);
           btns.forEach(function (x) { x.disabled = false; });
-          hint.textContent = 'Жөнөтүү мүмкүн болгон жок. Кайра аракет кылыңыз.';
+          hint.textContent = 'Жөнөтүү мүмкүн болгон жок. Интернетти текшерип, кайра аракет кылыңыз.';
         });
       });
     });
